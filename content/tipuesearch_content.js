@@ -1,1 +1,1 @@
-var tipuesearch = {"pages": [{'title': 'Week', 'text': '', 'tags': '', 'url': 'Week.html'}, {'title': 'Week1', 'text': 'test \n \n', 'tags': '', 'url': 'Week1.html'}]};
+var tipuesearch = {"pages": [{'title': 'Week', 'text': 'Week1-5 \n Week6-9', 'tags': '', 'url': 'Week.html'}, {'title': 'Week1-5', 'text': 'week1 \n 設定SSH及建立新倉儲 \n https://youtu.be/2rZgQCrJzkE \n \n \n', 'tags': '', 'url': 'Week1-5.html'}, {'title': 'Week6-9', 'text': '\n \n', 'tags': '', 'url': 'Week6-9.html'}]};
