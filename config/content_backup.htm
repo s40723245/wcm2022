@@ -101,7 +101,7 @@ def run1():
     try:
         url = doc.query["src"]
     except:
-        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/e8a7891ca62d39bba0499eb9161316d427480ef1/pygame_to_brython_tetris.py"
+        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/f6c8a871ad7ef6dbd5b1b0e0493707a3fc872b10/pygame_to_brython_tetris.py"
     prog = open(url).read()
 
     # 將程式載入編輯區
@@ -149,14 +149,12 @@ class button2:
 
 ################################## chasing 5 red rect start
 # execute only one time
-#cfrr_url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/a24fc82e9bf86a8c44b5a5ade5b88277ca71add9/chasing_5_red_rect.py"
-# continuously execution
 cfrr_url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/696cf8d02b53e6bc8816d18572777f88c3f23f4d/chasing_5_red_rect.py"
 cfrr = button2(cfrr_url)
 doc["cfrr"].bind("click", cfrr.do)
 ################################## chasing 5 red rect end
 ################################## tetris start
-tetris_url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/e8a7891ca62d39bba0499eb9161316d427480ef1/pygame_to_brython_tetris.py"
+tetris_url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/f6c8a871ad7ef6dbd5b1b0e0493707a3fc872b10/pygame_to_brython_tetris.py"
 tetris = button2(tetris_url)
 doc["tetris"].bind("click", tetris.do)
 ################################## tetris end
@@ -196,4 +194,9 @@ doc["tetris"].bind("click", tetris.do)
   };
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
+<h2>Tetris</h2>
+<p></p><h1>Note</h1>
+<p>Options of function bython()</p>
+<p>pythonpath 搜索導入的模組路徑</p>
+<p></p>
 <p></p>
