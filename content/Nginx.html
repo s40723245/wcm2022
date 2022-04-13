@@ -128,7 +128,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li class='has-children'><a href='Progress.html'>Progress</a><ul class='dropdown'><li><a href='Week1-5.html'>Week1-5</a><li><a href='Week6-9.html'>Week6-9</a></li></ul><li class='has-children'><a href='Programming.html'>Programming</a><ul class='dropdown'><li><a href='Brython.html'>Brython</a><li><a href='Tetris.html'>Tetris</a></li></ul><li><a href='Note.html'>Note</a></li>
+                     <li class='has-children'><a href='Progress.html'>Progress</a><ul class='dropdown'><li><a href='Week1~9.html'>Week1~9</a><li><a href='Week10~18.html'>Week10~18</a></li></ul><li class='has-children'><a href='Programming.html'>Programming</a><ul class='dropdown'><li><a href='Brython.html'>Brython</a><li><a href='Tetris.html'>Tetris</a><li><a href='Nginx.html'>Nginx</a></li></ul><li><a href='Note.html'>Note</a></li>
                       </ul>
                 </nav>
               </div>
@@ -139,13 +139,189 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Progress << <a href='Progress.html'>Previous</a> <a href='Week6-9.html'>Next</a> >> Week6-9<br /><h1>Week1-5</h1>
-<p>week1</p>
-<p>設定SSH及建立新倉儲</p>
-<p><a href="https://youtu.be/2rZgQCrJzkE">https://youtu.be/2rZgQCrJzkE</a></p>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/2rZgQCrJzkE" width="560"></iframe></p>
+    <div id="tipue_search_content">Tetris << <a href='Tetris.html'>Previous</a> <a href='Note.html'>Next</a> >> Note<br /><h1>Nginx</h1>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">#user  nobody;
+worker_processes  1;
+
+#error_log  logs/error.log;
+#error_log  logs/error.log  notice;
+#error_log  logs/error.log  info;
+
+#pid        logs/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+    #                  '$status $body_bytes_sent "$http_referer" '
+    #                  '"$http_user_agent" "$http_x_forwarded_for"';
+
+    #access_log  logs/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    #keepalive_timeout  0;
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    server {
+        listen       [::]:80 ipv6only=off;
+        listen       80;
+        server_name  localhost;
+        
+     
+        #allow 140.130.XX.0/24;
+        #allow 2001:288:6004:17::0/32;
+        #deny all;
+     
+        #location / {
+               #root C:/pj2022/nginx-1.20.2/spring2022;
+               #root Y:/tmp/wcm2022;
+               #root E:/sutdent_fourth_down/compile_copsim_cd2022/data/tmp/wcm2022;
+               #root Y:/nginx-1.20.2/;
+               #autoindex on;
+        #}
+     
+        #autoindex on;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+        
+
+        location / {
+            root   html;
+            #root E:/STL/;
+            #root Y:/nginx-1.20.2;
+            index  index.html index.htm;
+            try_files  $uri $uri/ /index.html;
+            autoindex on;
+        }
+
+        
+        #location /www/ {
+        #    root   Y:/tmp/wcm2022;
+        #}
+        
+        #location /image/ {
+        #    root   Y:/tmp/wcm2022/;
+        #}
+
+
+        #error_page  404              /404.html;
+
+        # redirect server error pages to the static page /50x.html
+        
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+            #root Y:/tmp/wcm2022;
+            #autoindex on;
+        }
+
+        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+        #
+        #location ~ \.php$ {
+        #    proxy_pass   http://127.0.0.1;
+        #}
+
+        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+        #
+        #location ~ \.php$ {
+        #    root           html;
+        #    fastcgi_pass   127.0.0.1:9000;
+        #    fastcgi_index  index.php;
+        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+        #    include        fastcgi_params;
+        #}
+
+        # deny access to .htaccess files, if Apache's document root
+        # concurs with nginx's one
+        #
+        #location ~ /\.ht {
+        #    deny  all;
+        #}
+    }
+
+
+    # another virtual host using mix of IP-, name-, and port-based configuration
+    #
+    #server {
+    #    listen       8000;
+    #    listen       somename:8080;
+    #    server_name  somename  alias  another.alias;
+
+    #    location / {
+    #        root   html;
+    #        index  index.html index.htm;
+    #    }
+    #}
+
+
+    # HTTPS server
+    #
+    #server {
+    #    listen       443 ssl;
+    #    server_name  localhost;
+
+    #    ssl_certificate      cert.pem;
+    #    ssl_certificate_key  cert.key;
+
+    #    ssl_session_cache    shared:SSL:1m;
+    #    ssl_session_timeout  5m;
+
+    #    ssl_ciphers  HIGH:!aNULL:!MD5;
+    #    ssl_prefer_server_ciphers  on;
+
+    #    location / {
+   #        root   html;
+    #        index  index.html index.htm;
+    #    }
+    #}
+
+}
+</pre>
 <p></p>
-<br />Progress << <a href='Progress.html'>Previous</a> <a href='Week6-9.html'>Next</a> >> Week6-9</div>
+<p>拿掉註解的版本</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">worker_processes  1;
+events {
+    worker_connections  1024;
+}
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+    sendfile        on;
+    keepalive_timeout  65;
+
+    server {
+        listen       [::]:80 ipv6only=off;
+        listen       80;
+        server_name  localhost;
+
+        location / {
+            root   html;
+            index  index.html index.htm;
+            try_files  $uri $uri/ /index.html;
+            autoindex on;
+        }
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+}
+</pre>
+<p>執行成功的畫面</p>
+<p><img alt="" height="1080" src="./../images/niginx_success.png" width="1920"/></p>
+<br />Tetris << <a href='Tetris.html'>Previous</a> <a href='Note.html'>Next</a> >> Note</div>
         
     <!-- footer -->
       <div class="container">
