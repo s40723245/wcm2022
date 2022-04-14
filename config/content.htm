@@ -7,37 +7,10 @@
 <p><a href="https://youtu.be/2rZgQCrJzkE">https://youtu.be/2rZgQCrJzkE</a></p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/2rZgQCrJzkE" width="560"></iframe></p>
 <p></p>
-<p>架設<a href="https://mde.tw/wcm2022_guide/content/Local%20and%20Remote.html">Nginx伺服器設定</a></p>
-<p>拿掉註解的版本(有註解的版本在<a href="https://s40723245.github.io/wcm2022/content/Nginx.html">這裡</a>)</p>
-<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">worker_processes  1;
-events {
-    worker_connections  1024;
-}
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-    sendfile        on;
-    keepalive_timeout  65;
-
-    server {
-        listen       [::]:80 ipv6only=off;
-        listen       80;
-        server_name  localhost;
-
-        location / {
-            root   html;
-            index  index.html index.htm;
-            try_files  $uri $uri/ /index.html;
-            autoindex on;
-        }
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-        }
-}
-</pre>
+<p>架設<a href="https://s40723245.github.io/wcm2022/content/Nginx.html">Nginx伺服器設定</a></p>
+<p></p>
 <p>執行成功的畫面</p>
-<p><img alt="" height="1080" src="/images/niginx_success.png" width="1920"/></p>
+<p><img caption="false" height="720" src="/images/niginx_success.png" width="1280"/></p>
 <p></p><h2>Week10~18</h2>
 <p><span></span></p>
 <p></p>
@@ -251,158 +224,7 @@ doc["tetris"].bind("click", tetris.do)
 <p>修改fps方塊下降速度太快的問題，讓玩家有更好的遊戲體驗</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">fps = 60</pre>
 <h2>Nginx</h2>
-<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">#user  nobody;
-worker_processes  1;
-
-#error_log  logs/error.log;
-#error_log  logs/error.log  notice;
-#error_log  logs/error.log  info;
-
-#pid        logs/nginx.pid;
-
-
-events {
-    worker_connections  1024;
-}
-
-
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-
-    #log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-    #                  '$status $body_bytes_sent "$http_referer" '
-    #                  '"$http_user_agent" "$http_x_forwarded_for"';
-
-    #access_log  logs/access.log  main;
-
-    sendfile        on;
-    #tcp_nopush     on;
-
-    #keepalive_timeout  0;
-    keepalive_timeout  65;
-
-    #gzip  on;
-
-    server {
-        listen       [::]:80 ipv6only=off;
-        listen       80;
-        server_name  localhost;
-        
-     
-        #allow 140.130.XX.0/24;
-        #allow 2001:288:6004:17::0/32;
-        #deny all;
-     
-        #location / {
-               #root C:/pj2022/nginx-1.20.2/spring2022;
-               #root Y:/tmp/wcm2022;
-               #root E:/sutdent_fourth_down/compile_copsim_cd2022/data/tmp/wcm2022;
-               #root Y:/nginx-1.20.2/;
-               #autoindex on;
-        #}
-     
-        #autoindex on;
-
-        #charset koi8-r;
-
-        #access_log  logs/host.access.log  main;
-        
-
-        location / {
-            root   html;
-            #root E:/STL/;
-            #root Y:/nginx-1.20.2;
-            index  index.html index.htm;
-            try_files  $uri $uri/ /index.html;
-            autoindex on;
-        }
-
-        
-        #location /www/ {
-        #    root   Y:/tmp/wcm2022;
-        #}
-        
-        #location /image/ {
-        #    root   Y:/tmp/wcm2022/;
-        #}
-
-
-        #error_page  404              /404.html;
-
-        # redirect server error pages to the static page /50x.html
-        
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-            #root Y:/tmp/wcm2022;
-            #autoindex on;
-        }
-
-        # proxy the PHP scripts to Apache listening on 127.0.0.1:80
-        #
-        #location ~ \.php$ {
-        #    proxy_pass   http://127.0.0.1;
-        #}
-
-        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
-        #
-        #location ~ \.php$ {
-        #    root           html;
-        #    fastcgi_pass   127.0.0.1:9000;
-        #    fastcgi_index  index.php;
-        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
-        #    include        fastcgi_params;
-        #}
-
-        # deny access to .htaccess files, if Apache's document root
-        # concurs with nginx's one
-        #
-        #location ~ /\.ht {
-        #    deny  all;
-        #}
-    }
-
-
-    # another virtual host using mix of IP-, name-, and port-based configuration
-    #
-    #server {
-    #    listen       8000;
-    #    listen       somename:8080;
-    #    server_name  somename  alias  another.alias;
-
-    #    location / {
-    #        root   html;
-    #        index  index.html index.htm;
-    #    }
-    #}
-
-
-    # HTTPS server
-    #
-    #server {
-    #    listen       443 ssl;
-    #    server_name  localhost;
-
-    #    ssl_certificate      cert.pem;
-    #    ssl_certificate_key  cert.key;
-
-    #    ssl_session_cache    shared:SSL:1m;
-    #    ssl_session_timeout  5m;
-
-    #    ssl_ciphers  HIGH:!aNULL:!MD5;
-    #    ssl_prefer_server_ciphers  on;
-
-    #    location / {
-   #        root   html;
-    #        index  index.html index.htm;
-    #    }
-    #}
-
-}
-</pre>
-<p></p>
-<p>拿掉註解的版本</p>
+<p><span>設定 nginx, 讓其中所伺服的檔案只允許系上電腦下載</span></p>
 <pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">worker_processes  1;
 events {
     worker_connections  1024;
@@ -417,22 +239,30 @@ http {
         listen       [::]:80 ipv6only=off;
         listen       80;
         server_name  localhost;
+        
+     
+        #allow 140.130.XX.0/24;
+        allow 2001:288:6004:XX::0/32;
+        deny all;
+
+        #access_log  logs/host.access.log  main;
+        
 
         location / {
-            root   html;
-            index  index.html index.htm;
-            try_files  $uri $uri/ /index.html;
-            autoindex on;
+            root Y:/tmp/wcm2022/;
         }
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
+
+        location /tmp/ {
+            root   Y:/;
         }
+        autoindex on;
+    }
 }
 </pre>
-<p>執行成功的畫面</p>
-<p><img alt="" height="1080" src="/images/niginx_success.png" width="1920"/></p>
-<h1>Note</h1>
+<p>因為已設定允許系上的網路ip可連上，因此用自己的網路時需要把deny all註解掉，否則只能用系上電腦才能連上nginx伺服器</p>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">#deny all;</pre>
+<p></p>
+<p></p><h1>Note</h1>
 <p>Options of function bython()</p>
 <p>pythonpath 搜索導入的模組路徑</p>
 <p></p>

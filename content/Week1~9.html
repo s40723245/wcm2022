@@ -144,37 +144,10 @@ img.add_border {
 <p><a href="https://youtu.be/2rZgQCrJzkE">https://youtu.be/2rZgQCrJzkE</a></p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/2rZgQCrJzkE" width="560"></iframe></p>
 <p></p>
-<p>架設<a href="https://mde.tw/wcm2022_guide/content/Local%20and%20Remote.html">Nginx伺服器設定</a></p>
-<p>拿掉註解的版本(有註解的版本在<a href="https://s40723245.github.io/wcm2022/content/Nginx.html">這裡</a>)</p>
-<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">worker_processes  1;
-events {
-    worker_connections  1024;
-}
-http {
-    include       mime.types;
-    default_type  application/octet-stream;
-    sendfile        on;
-    keepalive_timeout  65;
-
-    server {
-        listen       [::]:80 ipv6only=off;
-        listen       80;
-        server_name  localhost;
-
-        location / {
-            root   html;
-            index  index.html index.htm;
-            try_files  $uri $uri/ /index.html;
-            autoindex on;
-        }
-        error_page   500 502 503 504  /50x.html;
-        location = /50x.html {
-            root   html;
-        }
-}
-</pre>
+<p>架設<a href="https://s40723245.github.io/wcm2022/content/Nginx.html">Nginx伺服器設定</a></p>
+<p></p>
 <p>執行成功的畫面</p>
-<p><img alt="" height="1080" src="./../images/niginx_success.png" width="1920"/></p>
+<p><img caption="false" height="720" src="./../images/niginx_success.png" width="1280"/></p>
 <p></p><br />Progress << <a href='Progress.html'>Previous</a> <a href='Week10~18.html'>Next</a> >> Week10~18</div>
         
     <!-- footer -->
