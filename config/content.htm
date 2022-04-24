@@ -33,33 +33,33 @@ var winkVideoData = { dataVersion: 1, frameRate: 10, buttonFrameLength: 5, butto
 <p></p>
 <h1>Programming</h1>
 <h2>Brython</h2>
-<script src="/cmsimde/static/brython.js">
+<script src="/static/brython.js">
 </script>
-<script src="/cmsimde/static/brython_stdlib.js"></script>
+<script src="/static/brython_stdlib.js"></script>
 <!-- for ggame -->
 <p>
-<script src="/cmsimde/static/jquery-3.3.1.min.js"></script>
-<script src="/cmsimde/static/jquery-ui.1.12.1.min.js"></script>
-<script src="/cmsimde/static/pixi-3.0.5.min.js"></script>
-<script src="/cmsimde/static/buzz-1.2.1.js"></script>
-<script src="/cmsimde/static/bs.js"></script>
+<script src="/static/jquery-3.3.1.min.js"></script>
+<script src="/static/jquery-ui.1.12.1.min.js"></script>
+<script src="/static/pixi-3.0.5.min.js"></script>
+<script src="/static/buzz-1.2.1.js"></script>
+<script src="/static/bs.js"></script>
 <script src="/downloads/brython_modules.js"></script>
 </p>
 <!-- Cango 程式庫 -->
 <p>
-<script src="/cmsimde/static/Cango-24v03-min.js"></script>
-<script src="/cmsimde/static/CangoAxes-6v01-min.js"></script>
-<script src="/cmsimde/static/gearUtils-09.js"></script>
-<script src="/cmsimde/static/SVGpathUtils-6v03-min.js"></script>
-<script src="/cmsimde/static/sylvester.js"></script>
-<script src="/cmsimde/static/PrairieDraw.js"></script>
+<script src="/static/Cango-24v03-min.js"></script>
+<script src="/static/CangoAxes-6v01-min.js"></script>
+<script src="/static/gearUtils-09.js"></script>
+<script src="/static/SVGpathUtils-6v03-min.js"></script>
+<script src="/static/sylvester.js"></script>
+<script src="/static/PrairieDraw.js"></script>
 </p>
 <!-- for Konva 程式庫 -->
 <p>
-<script src="/cmsimde/static/konva.min.js"></script>
+<script src="/static/konva.min.js"></script>
 <script>
 window.onload=function(){
-brython({debug:1, pythonpath:['/cmsimde/static/','/downloads/py/']});
+brython({debug:1, pythonpath:['/static/','./../downloads/py/']});
 }
 </script>
 </p>
@@ -70,10 +70,10 @@ brython({debug:1, pythonpath:['/cmsimde/static/','/downloads/py/']});
 </p>
 <p><!-- 導入 ace --></p>
 <p>
-<script src="/cmsimde/static/ace/ace.js" type="text/javascript"></script>
-<script src="/cmsimde/static/ace/ext-language_tools.js" type="text/javascript"></script>
-<script src="/cmsimde/static/ace/mode-python3.js" type="text/javascript"></script>
-<script src="/cmsimde/static/ace/snippets/python.js" type="text/javascript"></script>
+<script src="/static/ace/ace.js" type="text/javascript"></script>
+<script src="/static/ace/ext-language_tools.js" type="text/javascript"></script>
+<script src="/static/ace/mode-python3.js" type="text/javascript"></script>
+<script src="/static/ace/snippets/python.js" type="text/javascript"></script>
 </p>
 <p><!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
 <p>
@@ -182,19 +182,19 @@ doc["tetris"].bind("click", tetris.do)
 ################################## tetris end
 </script>
 </p>
-<!-- <script src="/cmsimde/static/chimper/js/jquery-3.3.1.min.js"></script> -->
-<script src="/cmsimde/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
-<script src="/cmsimde/static/chimper/js/jquery-ui.js"></script>
-<script src="/cmsimde/static/chimper/js/popper.min.js"></script>
-<script src="/cmsimde/static/chimper/js/bootstrap.min.js"></script>
-<script src="/cmsimde/static/chimper/js/owl.carousel.min.js"></script>
-<script src="/cmsimde/static/chimper/js/jquery.stellar.min.js"></script>
-<script src="/cmsimde/static/chimper/js/jquery.countdown.min.js"></script>
-<script src="//cmsimde/static/chimper/js/jquery.magnific-popup.min.js"></script>
-<script src="/cmsimde/static/chimper/js/bootstrap-datepicker.min.js"></script>
-<script src="/cmsimde/static/chimper/js/aos.js"></script>
+<!-- <script src="/static/chimper/js/jquery-3.3.1.min.js"></script> -->
+<script src="/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/static/chimper/js/jquery-ui.js"></script>
+<script src="/static/chimper/js/popper.min.js"></script>
+<script src="/static/chimper/js/bootstrap.min.js"></script>
+<script src="/static/chimper/js/owl.carousel.min.js"></script>
+<script src="/static/chimper/js/jquery.stellar.min.js"></script>
+<script src="/static/chimper/js/jquery.countdown.min.js"></script>
+<script src="/static/chimper/js/jquery.magnific-popup.min.js"></script>
+<script src="/static/chimper/js/bootstrap-datepicker.min.js"></script>
+<script src="/static/chimper/js/aos.js"></script>
 <!--
-            <script src="../cmsimde/static/chimper/js/typed.js"></script>
+            <script src="/static/chimper/js/typed.js"></script>
                     <script>
                     var typed = new Typed('.typed-words', {
                     strings: ["Web Apps"," WordPress"," Mobile Apps"],
@@ -207,7 +207,7 @@ doc["tetris"].bind("click", tetris.do)
                     });
                     </script>
             -->
-<script src="/cmsimde/static/chimper/js/main.js"></script>
+<script src="/static/chimper/js/main.js"></script>
 <!-- 啟用 LaTeX equations 編輯 -->
 <p></p>
 <!-- <script>
@@ -216,8 +216,7 @@ doc["tetris"].bind("click", tetris.do)
   };
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
-<p></p>
-<h2>Tetris</h2>
+<p></p><h2>Tetris</h2>
 <p>用老師給的Tetris程式去新增及修改物件</p>
 <p>新增按下X鍵順時針旋轉</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    def rotate1(self):
