@@ -13,7 +13,7 @@
 <p>架設Niginx教學影片</p>
 <p><!--配合 Wink 檔案將 js 檔案設定如下--></p>
 <script>
-var winkVideoData = { 
+    var winkVideoData = { 
     dataVersion: 1, 
     frameRate: 10,
     buttonFrameLength: 5, 
@@ -25,7 +25,7 @@ var winkVideoData = {
 <!-- 接下來將 mp4 檔案從 downloads 目錄取出 -->
 <p></p>
 <!--在 div 外圍加入細黑線標定影片範圍, 且利用 padding 留下 top right buttom left 各 10px 間隔-->
-<div class="winkVideoContainerClass" style="border: thin solid black; padding: 10px;"><video autoplay="autoplay" class="winkVideoClass" controls="controls" data-dirname="/static" data-varname="winkVideoData" height="630" muted="true" width="1008">
+<div class="winkVideoContainerClass"><video autoplay="autoplay" class="winkVideoClass" controls="controls" data-dirname="/static" data-varname="winkVideoData" height="630" muted="true" width="1008">
 <source src="/downloads/wink/nginx_setup.mp4" type="video/mp4"/></video> <!--<div class="winkVideoContainerClass"><video width="1008" height="630" autoplay="autoplay" class="winkVideoClass" controls="controls" data-dirname="/static" data-varname="winkVideoData" muted="true">
 <source src="/downloads/wink/nginx_setup.mp4" type="video/mp4" /></video>--> <!--蓋掉由 Wink Javascript 與 css 所建立的影片控制項目--> <!--<div class="winkVideoOverlayClass"></div>
 <div class="winkVideoControlBarClass"><button class="winkVideoControlBarPlayButtonClass"></button> <button class="winkVideoControlBarPauseButtonClass"></button>
