@@ -2,7 +2,7 @@
 
 個人網站：https://s40723245.github.io/wcm2022
 
-Youtube：https://www.youtube.com/channel/UCKu4jLc5MwESsL2NlsZYp1A
+個人網誌：https://40723245.blogspot.com/
 
 reveal:https://s40723245.github.io/wcm2022/reveal
 
