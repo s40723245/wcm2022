@@ -140,7 +140,8 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">Brython << <a href='Brython.html'>Previous</a> <a href='Nginx.html'>Next</a> >> Nginx<br /><h1>Tetris</h1>
-<p>用老師給的Tetris程式去新增及修改物件</p>
+<p>用老師給的<a href="https://mde.tw/wcm2022/content/Brython.html">Tetris程式</a>去新增及修改物件</p>
+<p><a href="https://gist.githubusercontent.com/s40723245/b4c714af3b84315bd1473d592845c9e5/raw/d1944a452ef0d3878f854b2c8d5d36f0a87a4c43/key_codes.txt">keycode</a></p>
 <p>新增按下X鍵順時針旋轉</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    def rotate1(self):
         self.rotation = (self.rotation - 1) % len(self.figures[self.type])</pre>
@@ -153,7 +154,7 @@ img.add_border {
     if key == 88:
         game.rotate1()</pre>
 <p>修改按下Z鍵逆時針旋轉</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    # 90 is x key to anticlockwise rotate
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    # 90 is z key to anticlockwise rotate
     if key == 90:
         game.rotate()</pre>
 <p>修改按下空白鍵讓方塊下降到最底下</p>
@@ -162,7 +163,16 @@ img.add_border {
         game.go_space()</pre>
 <p>修改fps方塊下降速度太快的問題，讓玩家有更好的遊戲體驗</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">fps = 60</pre>
-<br />Brython << <a href='Brython.html'>Previous</a> <a href='Nginx.html'>Next</a> >> Nginx</div>
+<p>新增按下c鍵會往下降一格</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    def go_down(self):
+        self.figure.y += 1
+        if self.intersects():
+            self.figure.y -= 1
+            self.freeze()</pre>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    # 67 is c key to drop -1 on the y-axis
+    if key == 67:
+        game.go_down()</pre>
+<p></p><br />Brython << <a href='Brython.html'>Previous</a> <a href='Nginx.html'>Next</a> >> Nginx</div>
         
     <!-- footer -->
       <div class="container">
