@@ -7,3 +7,7 @@
 reveal:https://s40723245.github.io/wcm2022/reveal
 
 blog:https://s40723245.github.io/wcm2022/blog
+
+分組倉儲：https://github.com/s40723245/wcm2022ag3
+
+分組網站：https://s40723245.github.io/wcm2022ag3/
