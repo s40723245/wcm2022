@@ -311,7 +311,7 @@ def run1():
     try:
         url = doc.query["src"]
     except:
-        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/a4a733155806a77d9612647d5cbbd806c03fe92e/pygame_to_brython_tetris.py"
+        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/61ce009ef1d79175627ea02fb2a874844bd06b28/pygame_to_brython_tetris.py"
     prog = open(url).read()
 
     # 將程式載入編輯區
@@ -364,7 +364,7 @@ cfrr = button2(cfrr_url)
 doc["cfrr"].bind("click", cfrr.do)
 ################################## chasing 5 red rect end
 ################################## tetris start
-tetris_url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/a4a733155806a77d9612647d5cbbd806c03fe92e/pygame_to_brython_tetris.py"
+tetris_url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/61ce009ef1d79175627ea02fb2a874844bd06b28/pygame_to_brython_tetris.py"
 tetris = button2(tetris_url)
 doc["tetris"].bind("click", tetris.do)
 ################################## tetris end
