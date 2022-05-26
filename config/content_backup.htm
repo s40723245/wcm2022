@@ -311,7 +311,7 @@ def run1():
     try:
         url = doc.query["src"]
     except:
-        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/6422f7794dc4bf822c0b4d13f0d09635b94b95a9/pygame_to_brython_tetris.py"
+        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/a4a733155806a77d9612647d5cbbd806c03fe92e/pygame_to_brython_tetris.py"
     prog = open(url).read()
 
     # 將程式載入編輯區
@@ -364,7 +364,7 @@ cfrr = button2(cfrr_url)
 doc["cfrr"].bind("click", cfrr.do)
 ################################## chasing 5 red rect end
 ################################## tetris start
-tetris_url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/6422f7794dc4bf822c0b4d13f0d09635b94b95a9/pygame_to_brython_tetris.py"
+tetris_url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/a4a733155806a77d9612647d5cbbd806c03fe92e/pygame_to_brython_tetris.py"
 tetris = button2(tetris_url)
 doc["tetris"].bind("click", tetris.do)
 ################################## tetris end
@@ -404,8 +404,7 @@ doc["tetris"].bind("click", tetris.do)
   };
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
-<p></p>
-<h2>Tetris</h2>
+<p></p><h2>Tetris</h2>
 <p>用老師給的<a href="https://mde.tw/wcm2022/content/Brython.html">Tetris程式</a>去新增及修改物件</p>
 <p><a href="https://gist.githubusercontent.com/s40723245/b4c714af3b84315bd1473d592845c9e5/raw/d1944a452ef0d3878f854b2c8d5d36f0a87a4c43/key_codes.txt">keycode</a></p>
 <p>新增按下X鍵順時針旋轉</p>
@@ -749,6 +748,8 @@ doc.addEventListener("keyup", key_up)
 browser.timer.set_interval(do_game, fps)
 </script>
 <div id="brython_div"></div>
+<p></p>
+<!--<p><iframe width="880" height="600" src="https://s40723245.github.io/cd2020/downloads/Assignment1.pdf"></iframe></p>-->
 <p></p><h1>Note</h1>
 <p>Options of function bython()</p>
 <p>pythonpath 搜索導入的模組路徑</p>
