@@ -272,7 +272,7 @@ function doSave(storage_id, filename){
 }
 </script>
 </p>
-<p><button id="cfrr">5 個紅點方塊</button><button id="tetris">Tetris</button></p>
+<p></p>
 <p><!-- ######################  editor1 開始 ###################### --></p>
 <p><!-- 用來顯示程式碼的 editor 區域 --></p>
 <div id="kw_editor1" style="width: 600px; height: 300px;"></div>
@@ -310,7 +310,7 @@ def run1():
     try:
         url = doc.query["src"]
     except:
-        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/61ce009ef1d79175627ea02fb2a874844bd06b28/pygame_to_brython_tetris.py"
+        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/af763ab5473a9d26f8ee093ee7022a808a08b071/1a_stud.py"
     prog = open(url).read()
 
     # 將程式載入編輯區
@@ -332,43 +332,6 @@ doc['clear_bd1'].bind('click', clear_bd1)
 run1()
 </script>
 <!-- 以上為內建程式, 頁面可透過 ?src=gist_url 執行 --></p>
-<p><!-- add 1 to 100 開始 -->
-<script type="text/python3">
-from browser import document as doc
-import ace
-
-# 清除畫布
-def clear_bd1(ev):
-    bd = doc["brython_div1"]
-    bd.clear()
-
-# 利用 ace 中的 Editor 建立 Ace 物件, 其中的輸入變數分別對應到頁面中的編輯區物件
-Ace2 = ace.Editor(editor_id="kw_editor1", console_id="kw_console1", container_id="kw__container1", storage_id="kw_py_src1" )
-
-class button2:
-    def __init__(self, url):
-        self.url = url
-
-    # 記得加入 event 輸入變數
-    def do(self,ev):
-        Ace2.editor.setValue(open(self.url).read())
-        Ace2.editor.scrollToRow(0)
-        Ace2.editor.gotoLine(0)
-        Ace2.run()
-
-################################## chasing 5 red rect start
-# execute only one time
-cfrr_url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/696cf8d02b53e6bc8816d18572777f88c3f23f4d/chasing_5_red_rect.py"
-cfrr = button2(cfrr_url)
-doc["cfrr"].bind("click", cfrr.do)
-################################## chasing 5 red rect end
-################################## tetris start
-tetris_url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/61ce009ef1d79175627ea02fb2a874844bd06b28/pygame_to_brython_tetris.py"
-tetris = button2(tetris_url)
-doc["tetris"].bind("click", tetris.do)
-################################## tetris end
-</script>
-</p>
 <!-- <script src="/static/chimper/js/jquery-3.3.1.min.js"></script> -->
 <script src="/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="/static/chimper/js/jquery-ui.js"></script>
