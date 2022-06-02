@@ -2,7 +2,7 @@
         <head>
         <title>wcm2022</title>
         <meta charset="utf-8">
-<meta property="head" content="H2">
+<meta property="head" content="H1">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -128,7 +128,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li><a href='About.html'>About</a><li class='has-children'><a href='Progress.html'>Progress</a><ul class='dropdown'><li><a href='Week1~12.html'>Week1~12</a><li><a href='W13.html'>W13</a><li><a href='W14.html'>W14</a></li></ul><li class='has-children'><a href='Programming.html'>Programming</a><ul class='dropdown'><li><a href='Brython.html'>Brython</a><li><a href='Tetris.html'>Tetris</a><li><a href='Nginx.html'>Nginx</a></li></ul><li><a href='midterm.html'>midterm</a><li><a href='Assignment.html'>Assignment</a><li class='has-children'><a href='Note.html'>Note</a><ul class='dropdown'><li><a href='git指令.html'>git指令</a></li>
+                     <li><a href='About.html'>About</a><li class='has-children'><a href='Progress.html'>Progress</a><ul class='dropdown'><li><a href='Week1~12.html'>Week1~12</a><li><a href='W13.html'>W13</a><li><a href='W14.html'>W14</a></li></ul><li class='has-children'><a href='Programming.html'>Programming</a><ul class='dropdown'><li><a href='Brython.html'>Brython</a><li><a href='tetris.html'>tetris</a><li><a href='Nginx.html'>Nginx</a></li></ul><li><a href='midterm.html'>midterm</a><li class='has-children'><a href='Assignment.html'>Assignment</a><ul class='dropdown'><li><a href='Assignment1.html'>Assignment1</a></li></ul><li class='has-children'><a href='Tetris.html'>Tetris</a><ul class='dropdown'><li><a href='Project report.html'>Project report</a></li></ul><li class='has-children'><a href='Note.html'>Note</a><ul class='dropdown'><li><a href='git指令.html'>git指令</a></li>
                       </ul>
                 </nav>
               </div>
@@ -139,41 +139,133 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Brython << <a href='Brython.html'>Previous</a> <a href='Nginx.html'>Next</a> >> Nginx<br /><h1>Tetris</h1>
-<p>用老師給的<a href="https://mde.tw/wcm2022/content/Brython.html">Tetris程式</a>去新增及修改物件</p>
-<p><a href="https://gist.githubusercontent.com/s40723245/b4c714af3b84315bd1473d592845c9e5/raw/d1944a452ef0d3878f854b2c8d5d36f0a87a4c43/key_codes.txt">keycode</a></p>
-<p>新增按下X鍵順時針旋轉</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    def rotate1(self):
-        self.rotation = (self.rotation - 1) % len(self.figures[self.type])</pre>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    def rotate1(self):
-        old_rotation = self.figure.rotation
-        self.figure.rotate1()
-        if self.intersects():
-            self.figure.rotation = old_rotation</pre>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    # 88 is x key to clockwise rotate
-    if key == 88:
-        game.rotate1()</pre>
-<p>修改按下Z鍵逆時針旋轉</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    # 90 is z key to anticlockwise rotate
-    if key == 90:
-        game.rotate()</pre>
-<p>修改按下空白鍵讓方塊下降到最底下</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    # 32 is space key to move block to bottom
-    if key == 32:
-        game.go_space()</pre>
-<p>修改fps方塊下降速度太快的問題，讓玩家有更好的遊戲體驗</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">fps = 60</pre>
-<p>新增按下c鍵會往下降一格</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    def go_down(self):
-        self.figure.y += 1
-        if self.intersects():
-            self.figure.y -= 1
-            self.freeze()</pre>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    # 67 is c key to drop -1 on the y-axis
-    if key == 67:
-        game.go_down()</pre>
+    <div id="tipue_search_content">Assignment1 << <a href='Assignment1.html'>Previous</a> <a href='Project report.html'>Next</a> >> Project report<br /><h1>Tetris</h1>
 <p></p>
-<br />Brython << <a href='Brython.html'>Previous</a> <a href='Nginx.html'>Next</a> >> Nginx</div>
+<script src="./../cmsimde/static/brython.js">
+</script>
+<script src="./../cmsimde/static/brython_stdlib.js"></script>
+<!-- for ggame -->
+<p>
+<script src="./../cmsimde/static/jquery-3.3.1.min.js"></script>
+<script src="./../cmsimde/static/jquery-ui.1.12.1.min.js"></script>
+<script src="./../cmsimde/static/pixi-3.0.5.min.js"></script>
+<script src="./../cmsimde/static/buzz-1.2.1.js"></script>
+<script src="./../cmsimde/static/bs.js"></script>
+<script src="./../downloads/brython_modules.js"></script>
+</p>
+<!-- Cango 程式庫 -->
+<p>
+<script src="./../cmsimde/static/Cango-24v03-min.js"></script>
+<script src="./../cmsimde/static/CangoAxes-6v01-min.js"></script>
+<script src="./../cmsimde/static/gearUtils-09.js"></script>
+<script src="./../cmsimde/static/SVGpathUtils-6v03-min.js"></script>
+<script src="./../cmsimde/static/sylvester.js"></script>
+<script src="./../cmsimde/static/PrairieDraw.js"></script>
+</p>
+<!-- for Konva 程式庫 -->
+<p>
+<script src="./../cmsimde/static/konva.min.js"></script>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
+}
+</script>
+</p>
+<p><!-- 導入 FileSaver 與 filereader --></p>
+<p>
+<script src="/cmsimde/static/ace/FileSaver.min.js" type="text/javascript"></script>
+<script src="/cmsimde/static/ace/filereader.js" type="text/javascript"></script>
+</p>
+<p><!-- 導入 ace --></p>
+<p>
+<script src="./../cmsimde/static/ace/ace.js" type="text/javascript"></script>
+<script src="./../cmsimde/static/ace/ext-language_tools.js" type="text/javascript"></script>
+<script src="./../cmsimde/static/ace/mode-python3.js" type="text/javascript"></script>
+<script src="./../cmsimde/static/ace/snippets/python.js" type="text/javascript"></script>
+</p>
+<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
+<p>
+<script type="text/javascript">
+function doSave(storage_id, filename){
+    var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});
+    filename = document.getElementById(filename).value
+    saveAs(blob, filename+".py");
+}
+</script>
+</p>
+<p></p>
+<p><!-- ######################  editor1 開始 ###################### --></p>
+<p><!-- 用來顯示程式碼的 editor 區域 --></p>
+<div id="kw_editor1" style="width: 600px; height: 300px;"></div>
+<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
+<p><!-- 存擋表單開始 --></p>
+<form><label>Filename: <input id="kw_filename" placeholder="input file name" type="text"/>.py</label> <input onclick="doSave('kw_py_src1', 'kw_filename1');" type="submit" value="Save"/></form>
+<p><!-- 存擋表單結束 --></p>
+<p></p>
+<p><!-- 執行與清除按鈕開始 --></p>
+<p><button id="kw_run1">Run</button> <button id="kw_show_console1">Output</button> <button id="kw_clear_console1">清除輸出區</button><button id="clear_bd1">清除繪圖區</button><button onclick="window.location.reload()">Reload</button></p>
+<p><!-- 執行與清除按鈕結束 --></p>
+<p></p>
+<p><!-- 程式執行 ouput 區 --></p>
+<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console1"></textarea></div>
+<p><!-- Brython 程式執行的結果, 都以 brython_div 作為切入位置 --></p>
+<p><!-- 這裡的畫布 id 為 brython_div --></p>
+<div id="brython_div"></div>
+<!-- graphics-column is for ggame -->
+<div class="col-md-0" height="1" id="graphics-column" width="1"></div>
+<p><!-- ######################  editor1 結束 ###################### --></p>
+<p><!-- 以下可以開始利用 editor1 的設定編寫對應 Brython 程式 -->
+<script type="text/python3">
+from browser import document as doc
+import ace
+
+# 清除畫布
+def clear_bd1(ev):
+    # 注意這裡清除的畫布 id 為 brython_div
+    bd = doc["brython_div"]
+    bd.clear()
+Ace1 = ace.Editor(editor_id="kw_editor1", console_id="kw_console1", container_id="kw__container1", storage_id="kw_py_src1" )
+# 從 gist 取出程式碼後, 放入 editor 作為 default 程式
+def run1():
+    # 利用 get 取下 src 變數值
+    try:
+        url = doc.query["src"]
+    except:
+        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/eebea0485cf5c4f0e828230a8c736d5ffe3e236c/pygame_to_brython_tetris.py"
+    prog = open(url).read()
+
+    # 將程式載入編輯區
+    Ace1.editor.setValue(prog)
+    Ace1.editor.scrollToRow(0)
+    Ace1.editor.gotoLine(0)
+    # 直接執行程式
+    #ns = {'__name__':'__main__'}
+    #exec(prog, ns)
+    # 按下 run 按鈕
+    Ace1.run()
+
+# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
+doc['kw_run1'].bind('click', Ace1.run)
+doc['kw_show_console1'].bind('click', Ace1.show_console)
+doc['kw_clear_console1'].bind('click', Ace1.clear_console)
+doc['clear_bd1'].bind('click', clear_bd1)
+# 呼叫函式執行
+run1()
+</script>
+<!-- 以上為內建程式, 頁面可透過 ?src=gist_url 執行 --></p>
+<!-- <script src="./../cmsimde/static/chimper/js/jquery-3.3.1.min.js"></script> -->
+<script src="./../cmsimde/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="./../cmsimde/static/chimper/js/jquery-ui.js"></script>
+<script src="./../cmsimde/static/chimper/js/popper.min.js"></script>
+<script src="./../cmsimde/static/chimper/js/bootstrap.min.js"></script>
+<script src="./../cmsimde/static/chimper/js/owl.carousel.min.js"></script>
+<script src="./../cmsimde/static/chimper/js/jquery.stellar.min.js"></script>
+<script src="./../cmsimde/static/chimper/js/jquery.countdown.min.js"></script>
+<script src="./../cmsimde/static/chimper/js/jquery.magnific-popup.min.js"></script>
+<script src="./../cmsimde/static/chimper/js/bootstrap-datepicker.min.js"></script>
+<script src="./../cmsimde/static/chimper/js/aos.js"></script>
+<script src="./../cmsimde/static/chimper/js/main.js"></script>
+<br />Assignment1 << <a href='Assignment1.html'>Previous</a> <a href='Project report.html'>Next</a> >> Project report</div>
         
     <!-- footer -->
       <div class="container">

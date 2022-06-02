@@ -551,7 +551,7 @@ doc["tetris"].bind("click", tetris.do)
   };
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>-->
-<p></p><h2>Tetris</h2>
+<p></p><h2>tetris</h2>
 <p>用老師給的<a href="https://mde.tw/wcm2022/content/Brython.html">Tetris程式</a>去新增及修改物件</p>
 <p><a href="https://gist.githubusercontent.com/s40723245/b4c714af3b84315bd1473d592845c9e5/raw/d1944a452ef0d3878f854b2c8d5d36f0a87a4c43/key_codes.txt">keycode</a></p>
 <p>新增按下X鍵順時針旋轉</p>
@@ -584,8 +584,7 @@ doc["tetris"].bind("click", tetris.do)
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    # 67 is c key to drop -1 on the y-axis
     if key == 67:
         game.go_down()</pre>
-<p></p>
-<h2>Nginx</h2>
+<p></p><h2>Nginx</h2>
 <p><span>設定 nginx, 讓其中所伺服的檔案只允許系上電腦下載</span></p>
 <pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">worker_processes  1;
 events {
@@ -647,256 +646,261 @@ var winkVideoData = { dataVersion: 1, frameRate: 10, buttonFrameLength: 5, butto
 <p><span></span></p>
 <h1>Assignment</h1>
 <p>Assignment1：<a href="https://s40723245.github.io/wcm2022/downloads/Assignment1.pdf">https://s40723245.github.io/wcm2022/downloads/Assignment1.pdf</a></p>
-<script src="/static/brython.js"></script>
+<script src="/static/brython.js">
+</script>
 <script src="/static/brython_stdlib.js"></script>
+<!-- for ggame -->
+<p>
+<script src="/static/jquery-3.3.1.min.js"></script>
+<script src="/static/jquery-ui.1.12.1.min.js"></script>
+<script src="/static/pixi-3.0.5.min.js"></script>
+<script src="/static/buzz-1.2.1.js"></script>
+<script src="/static/bs.js"></script>
+<script src="/downloads/brython_modules.js"></script>
+</p>
+<!-- Cango 程式庫 -->
+<p>
+<script src="/static/Cango-24v03-min.js"></script>
+<script src="/static/CangoAxes-6v01-min.js"></script>
+<script src="/static/gearUtils-09.js"></script>
+<script src="/static/SVGpathUtils-6v03-min.js"></script>
+<script src="/static/sylvester.js"></script>
+<script src="/static/PrairieDraw.js"></script>
+</p>
+<!-- for Konva 程式庫 -->
+<p>
+<script src="/static/konva.min.js"></script>
 <script>
-window.onload=function(){brython();}
+window.onload=function(){
+brython({debug:1, pythonpath:['/static/','./../downloads/py/']});
+}
 </script>
-<script type="text/python3">
-# from https://levelup.gitconnected.com/writing-tetris-in-python-2a16bddb5318
-# 暫時關閉 system proxy 設定後,  pip install pygame
-#import pygame
-import random
-# 以下為 Brython 新增
-from browser import document as doc
-from browser import html
-import browser.timer
-
-# 利用 html 建立一個 CANVAS 標註物件, 與變數 canvas 對應
-canvas = html.CANVAS(width = 400, height = 500, id="canvas")
-brython_div = doc["brython_div"]
-brython_div <= canvas
-ctx = canvas.getContext("2d")
-
-colors = [
-    (0, 0, 0),
-    (120, 37, 179),
-    (100, 179, 179),
-    (80, 34, 22),
-    (80, 134, 22),
-    (180, 34, 22),
-    (180, 34, 122),
-]
-
-
-class Figure:
-    x = 0
-    y = 0
-
-    figures = [
-        [[1, 5, 9, 13], [4, 5, 6, 7]],
-        [[4, 5, 9, 10], [2, 6, 5, 9]],
-        [[6, 7, 9, 10], [1, 5, 6, 10]],
-        [[1, 2, 5, 9], [0, 4, 5, 6], [1, 5, 9, 8], [4, 5, 6, 10]],
-        [[1, 2, 6, 10], [5, 6, 7, 9], [2, 6, 10, 11], [3, 5, 6, 7]],
-        [[1, 4, 5, 6], [1, 4, 5, 9], [4, 5, 6, 9], [1, 5, 6, 9]],
-        [[1, 2, 5, 6]],
-    ]
-
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        self.type = random.randint(0, len(self.figures) - 1)
-        self.color = random.randint(1, len(colors) - 1)
-        self.rotation = 0
-
-    def image(self):
-        return self.figures[self.type][self.rotation]
-
-    def rotate(self):
-        self.rotation = (self.rotation + 1) % len(self.figures[self.type])
-    
-    def rotate1(self):
-        self.rotation = (self.rotation - 1) % len(self.figures[self.type])
-
-class Tetris:
-    level = 2
-    score = 0
-    state = "start"
-    field = []
-    height = 0
-    width = 0
-    x = 100
-    y = 60
-    zoom = 20
-    figure = None
-
-    def __init__(self, height, width):
-        self.height = height
-        self.width = width
-        self.field = []
-        self.score = 0
-        self.state = "start"
-        for i in range(height):
-            new_line = []
-            for j in range(width):
-                # 起始時每一個都填入 0
-                new_line.append(0)
-            self.field.append(new_line)
-
-    def new_figure(self):
-        self.figure = Figure(3, 0)
-
-    def intersects(self):
-        intersection = False
-        for i in range(4):
-            for j in range(4):
-                if i * 4 + j in self.figure.image():
-                    # block 到達底部, 左右兩邊界, 或該座標有其他 block
-                    if i + self.figure.y > self.height - 1 or \
-                            j + self.figure.x > self.width - 1 or \
-                            j + self.figure.x < 0 or \
-                            self.field[i + self.figure.y][j + self.figure.x] > 0:
-                        intersection = True
-        return intersection
-
-    def break_lines(self):
-        lines = 0
-        for i in range(1, self.height):
-            zeros = 0
-            for j in range(self.width):
-                if self.field[i][j] == 0:
-                    zeros += 1
-            if zeros == 0:
-                lines += 1
-                for i1 in range(i, 1, -1):
-                    for j in range(self.width):
-                        self.field[i1][j] = self.field[i1 - 1][j]
-        self.score += lines ** 2
-
-    def go_space(self):
-        while not self.intersects():
-            self.figure.y += 1
-        self.figure.y -= 1
-        self.freeze()
-
-    def go_down(self):
-        self.figure.y += 1
-        if self.intersects():
-            self.figure.y -= 1
-            self.freeze()
-
-    def freeze(self):
-        for i in range(4):
-            for j in range(4):
-                if i * 4 + j in self.figure.image():
-                    self.field[i + self.figure.y][j + self.figure.x] = self.figure.color
-        self.break_lines()
-        self.new_figure()
-        if self.intersects():
-            self.state = "gameover"
-
-    def go_side(self, dx):
-        old_x = self.figure.x
-        self.figure.x += dx
-        if self.intersects():
-            self.figure.x = old_x
-
-    def rotate(self):
-        old_rotation = self.figure.rotation
-        self.figure.rotate()
-        if self.intersects():
-            self.figure.rotation = old_rotation
-            
-    def rotate1(self):
-        old_rotation = self.figure.rotation
-        self.figure.rotate1()
-        if self.intersects():
-            self.figure.rotation = old_rotation
-
-# Define some colors
-# from https://stackoverflow.com/questions/3380726/converting-a-rgb-color-tuple-to-a-six-digit-code
-BLACK = '#%02x%02x%02x' % (0, 0, 0)
-WHITE = '#%02x%02x%02x' % (255, 255, 255)
-GRAY = '#%02x%02x%02x' % (128, 128, 128)
-
-done = False
-fps = 60
-game = Tetris(20, 10)
-counter = 0
-
-pressing_down = False
-
-def key_down(eve):
-    key = eve.keyCode
-    #if event.type == pygame.QUIT:
-    # 32 is pause
-    if key == 32:
-        done = True
-    # 88 is x key to clockwise rotate
-    if key == 88:
-        game.rotate1()
-    # 90 is z key to anticlockwise rotate
-    if key == 90:
-        game.rotate()
-    # 67 is c key to drop -1 on the y-axis
-    if key == 67:
-        game.go_down()
-    # 40 is down key
-    if key == 40:
-        pressing_down = True
-    # 37 is left key
-    if key == 37:
-        game.go_side(-1)
-    # 39 is right key
-    if key == 39:
-        game.go_side(1)
-    # 32 is space key to move block to bottom
-    if key == 32:
-        game.go_space()
-    # 27 is escape
-    # reset the game
-    if key == 27:
-        game.__init__(20, 10)
-
-def key_up(eve):
-    key = eve.keyCode
-    # 40 is down key
-    if key == 40:
-        pressing_down = False
-
-#while not done:
-def do_game():
-    global counter
-    if game.figure is None:
-        game.new_figure()
-    counter += 1
-    if counter > 100000:
-        counter = 0
-    if counter % (fps // game.level // 2) == 0 or pressing_down:
-        if game.state == "start":
-            game.go_down()
-    
-    for i in range(game.height):
-        for j in range(game.width):
-            ctx.fillStyle = WHITE
-            #ctx.scale(game.zoom, game.zoom)
-            ctx.fillRect(game.x + game.zoom * j, game.y + game.zoom * i, game.zoom, game.zoom)
-            if game.field[i][j] > 0:
-                ctx.fillStyle = '#%02x%02x%02x' % colors[game.field[i][j]]
-                ctx.fillRect(game.x + game.zoom * j + 1, game.y + game.zoom * i + 1, game.zoom - 2, game.zoom - 1)
-            ctx.lineWidth = 1
-            ctx.strokeStyle = GRAY
-            ctx.beginPath()
-            ctx.rect(game.x + game.zoom * j, game.y + game.zoom * i, game.zoom, game.zoom)
-            ctx.stroke()
-    if game.figure is not None:
-        for i in range(4):
-            for j in range(4):
-                p = i * 4 + j
-                if p in game.figure.image():
-                    ctx.fillStyle = '#%02x%02x%02x' % colors[game.figure.color]
-                    ctx.fillRect(game.x + game.zoom * (j + game.figure.x) + 1,
-                                      game.y + game.zoom * (i + game.figure.y) + 1,
-                                      game.zoom - 2, game.zoom - 2)
-
-doc.addEventListener("keydown", key_down)
-doc.addEventListener("keyup", key_up)
-browser.timer.set_interval(do_game, fps)
+</p>
+<p><!-- 導入 FileSaver 與 filereader --></p>
+<p>
+<script src="/cmsimde/static/ace/FileSaver.min.js" type="text/javascript"></script>
+<script src="/cmsimde/static/ace/filereader.js" type="text/javascript"></script>
+</p>
+<p><!-- 導入 ace --></p>
+<p>
+<script src="/static/ace/ace.js" type="text/javascript"></script>
+<script src="/static/ace/ext-language_tools.js" type="text/javascript"></script>
+<script src="/static/ace/mode-python3.js" type="text/javascript"></script>
+<script src="/static/ace/snippets/python.js" type="text/javascript"></script>
+</p>
+<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
+<p>
+<script type="text/javascript">
+function doSave(storage_id, filename){
+    var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});
+    filename = document.getElementById(filename).value
+    saveAs(blob, filename+".py");
+}
 </script>
-<div id="brython_div"></div>
+</p>
 <p></p>
+<p><!-- ######################  editor1 開始 ###################### --></p>
+<p><!-- 用來顯示程式碼的 editor 區域 --></p>
+<div id="kw_editor1" style="width: 600px; height: 300px;"></div>
+<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
+<p><!-- 存擋表單開始 --></p>
+<form><label>Filename: <input id="kw_filename" placeholder="input file name" type="text"/>.py</label> <input onclick="doSave('kw_py_src1', 'kw_filename1');" type="submit" value="Save"/></form>
+<p><!-- 存擋表單結束 --></p>
+<p></p>
+<p><!-- 執行與清除按鈕開始 --></p>
+<p><button id="kw_run1">Run</button> <button id="kw_show_console1">Output</button> <button id="kw_clear_console1">清除輸出區</button><button id="clear_bd1">清除繪圖區</button><button onclick="window.location.reload()">Reload</button></p>
+<p><!-- 執行與清除按鈕結束 --></p>
+<p></p>
+<p><!-- 程式執行 ouput 區 --></p>
+<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console1"></textarea></div>
+<p><!-- Brython 程式執行的結果, 都以 brython_div 作為切入位置 --></p>
+<p><!-- 這裡的畫布 id 為 brython_div --></p>
+<div id="brython_div"></div>
+<!-- graphics-column is for ggame -->
+<div class="col-md-0" height="1" id="graphics-column" width="1"></div>
+<p><!-- ######################  editor1 結束 ###################### --></p>
+<p><!-- 以下可以開始利用 editor1 的設定編寫對應 Brython 程式 -->
+<script type="text/python3">
+from browser import document as doc
+import ace
+
+# 清除畫布
+def clear_bd1(ev):
+    # 注意這裡清除的畫布 id 為 brython_div
+    bd = doc["brython_div"]
+    bd.clear()
+Ace1 = ace.Editor(editor_id="kw_editor1", console_id="kw_console1", container_id="kw__container1", storage_id="kw_py_src1" )
+# 從 gist 取出程式碼後, 放入 editor 作為 default 程式
+def run1():
+    # 利用 get 取下 src 變數值
+    try:
+        url = doc.query["src"]
+    except:
+        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/af763ab5473a9d26f8ee093ee7022a808a08b071/pygame_to_brython_tetris.py"
+    prog = open(url).read()
+
+    # 將程式載入編輯區
+    Ace1.editor.setValue(prog)
+    Ace1.editor.scrollToRow(0)
+    Ace1.editor.gotoLine(0)
+    # 直接執行程式
+    #ns = {'__name__':'__main__'}
+    #exec(prog, ns)
+    # 按下 run 按鈕
+    Ace1.run()
+
+# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
+doc['kw_run1'].bind('click', Ace1.run)
+doc['kw_show_console1'].bind('click', Ace1.show_console)
+doc['kw_clear_console1'].bind('click', Ace1.clear_console)
+doc['clear_bd1'].bind('click', clear_bd1)
+# 呼叫函式執行
+run1()
+</script>
+<!-- 以上為內建程式, 頁面可透過 ?src=gist_url 執行 --></p>
+<!-- <script src="/static/chimper/js/jquery-3.3.1.min.js"></script> -->
+<script src="/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/static/chimper/js/jquery-ui.js"></script>
+<script src="/static/chimper/js/popper.min.js"></script>
+<script src="/static/chimper/js/bootstrap.min.js"></script>
+<script src="/static/chimper/js/owl.carousel.min.js"></script>
+<script src="/static/chimper/js/jquery.stellar.min.js"></script>
+<script src="/static/chimper/js/jquery.countdown.min.js"></script>
+<script src="/static/chimper/js/jquery.magnific-popup.min.js"></script>
+<script src="/static/chimper/js/bootstrap-datepicker.min.js"></script>
+<script src="/static/chimper/js/aos.js"></script>
+<script src="/static/chimper/js/main.js"></script>
+<p></p>
+<h2>Assignment1</h2>
 <p><iframe height="600" src="https://s40723245.github.io/wcm2022/downloads/Assignment1.pdf" width="880"></iframe></p>
+<p></p><h1>Tetris</h1>
+<p></p>
+<script src="/static/brython.js">
+</script>
+<script src="/static/brython_stdlib.js"></script>
+<!-- for ggame -->
+<p>
+<script src="/static/jquery-3.3.1.min.js"></script>
+<script src="/static/jquery-ui.1.12.1.min.js"></script>
+<script src="/static/pixi-3.0.5.min.js"></script>
+<script src="/static/buzz-1.2.1.js"></script>
+<script src="/static/bs.js"></script>
+<script src="/downloads/brython_modules.js"></script>
+</p>
+<!-- Cango 程式庫 -->
+<p>
+<script src="/static/Cango-24v03-min.js"></script>
+<script src="/static/CangoAxes-6v01-min.js"></script>
+<script src="/static/gearUtils-09.js"></script>
+<script src="/static/SVGpathUtils-6v03-min.js"></script>
+<script src="/static/sylvester.js"></script>
+<script src="/static/PrairieDraw.js"></script>
+</p>
+<!-- for Konva 程式庫 -->
+<p>
+<script src="/static/konva.min.js"></script>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['/static/','./../downloads/py/']});
+}
+</script>
+</p>
+<p><!-- 導入 FileSaver 與 filereader --></p>
+<p>
+<script src="/cmsimde/static/ace/FileSaver.min.js" type="text/javascript"></script>
+<script src="/cmsimde/static/ace/filereader.js" type="text/javascript"></script>
+</p>
+<p><!-- 導入 ace --></p>
+<p>
+<script src="/static/ace/ace.js" type="text/javascript"></script>
+<script src="/static/ace/ext-language_tools.js" type="text/javascript"></script>
+<script src="/static/ace/mode-python3.js" type="text/javascript"></script>
+<script src="/static/ace/snippets/python.js" type="text/javascript"></script>
+</p>
+<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
+<p>
+<script type="text/javascript">
+function doSave(storage_id, filename){
+    var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});
+    filename = document.getElementById(filename).value
+    saveAs(blob, filename+".py");
+}
+</script>
+</p>
+<p></p>
+<p><!-- ######################  editor1 開始 ###################### --></p>
+<p><!-- 用來顯示程式碼的 editor 區域 --></p>
+<div id="kw_editor1" style="width: 600px; height: 300px;"></div>
+<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
+<p><!-- 存擋表單開始 --></p>
+<form><label>Filename: <input id="kw_filename" placeholder="input file name" type="text"/>.py</label> <input onclick="doSave('kw_py_src1', 'kw_filename1');" type="submit" value="Save"/></form>
+<p><!-- 存擋表單結束 --></p>
+<p></p>
+<p><!-- 執行與清除按鈕開始 --></p>
+<p><button id="kw_run1">Run</button> <button id="kw_show_console1">Output</button> <button id="kw_clear_console1">清除輸出區</button><button id="clear_bd1">清除繪圖區</button><button onclick="window.location.reload()">Reload</button></p>
+<p><!-- 執行與清除按鈕結束 --></p>
+<p></p>
+<p><!-- 程式執行 ouput 區 --></p>
+<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console1"></textarea></div>
+<p><!-- Brython 程式執行的結果, 都以 brython_div 作為切入位置 --></p>
+<p><!-- 這裡的畫布 id 為 brython_div --></p>
+<div id="brython_div"></div>
+<!-- graphics-column is for ggame -->
+<div class="col-md-0" height="1" id="graphics-column" width="1"></div>
+<p><!-- ######################  editor1 結束 ###################### --></p>
+<p><!-- 以下可以開始利用 editor1 的設定編寫對應 Brython 程式 -->
+<script type="text/python3">
+from browser import document as doc
+import ace
+
+# 清除畫布
+def clear_bd1(ev):
+    # 注意這裡清除的畫布 id 為 brython_div
+    bd = doc["brython_div"]
+    bd.clear()
+Ace1 = ace.Editor(editor_id="kw_editor1", console_id="kw_console1", container_id="kw__container1", storage_id="kw_py_src1" )
+# 從 gist 取出程式碼後, 放入 editor 作為 default 程式
+def run1():
+    # 利用 get 取下 src 變數值
+    try:
+        url = doc.query["src"]
+    except:
+        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/eebea0485cf5c4f0e828230a8c736d5ffe3e236c/pygame_to_brython_tetris.py"
+    prog = open(url).read()
+
+    # 將程式載入編輯區
+    Ace1.editor.setValue(prog)
+    Ace1.editor.scrollToRow(0)
+    Ace1.editor.gotoLine(0)
+    # 直接執行程式
+    #ns = {'__name__':'__main__'}
+    #exec(prog, ns)
+    # 按下 run 按鈕
+    Ace1.run()
+
+# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
+doc['kw_run1'].bind('click', Ace1.run)
+doc['kw_show_console1'].bind('click', Ace1.show_console)
+doc['kw_clear_console1'].bind('click', Ace1.clear_console)
+doc['clear_bd1'].bind('click', clear_bd1)
+# 呼叫函式執行
+run1()
+</script>
+<!-- 以上為內建程式, 頁面可透過 ?src=gist_url 執行 --></p>
+<!-- <script src="/static/chimper/js/jquery-3.3.1.min.js"></script> -->
+<script src="/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/static/chimper/js/jquery-ui.js"></script>
+<script src="/static/chimper/js/popper.min.js"></script>
+<script src="/static/chimper/js/bootstrap.min.js"></script>
+<script src="/static/chimper/js/owl.carousel.min.js"></script>
+<script src="/static/chimper/js/jquery.stellar.min.js"></script>
+<script src="/static/chimper/js/jquery.countdown.min.js"></script>
+<script src="/static/chimper/js/jquery.magnific-popup.min.js"></script>
+<script src="/static/chimper/js/bootstrap-datepicker.min.js"></script>
+<script src="/static/chimper/js/aos.js"></script>
+<script src="/static/chimper/js/main.js"></script>
+<h2>pdf</h2>
+<p><iframe height="600" src="https://s40723245.github.io/wcm2022/downloads/Tetris_brython.pdf" width="880"></iframe></p>
 <p></p><h1>Note</h1>
 <p>Options of function bython()</p>
 <p>pythonpath 搜索導入的模組路徑</p>
