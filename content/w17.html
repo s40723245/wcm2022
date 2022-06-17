@@ -140,20 +140,16 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">final << <a href='final.html'>Previous</a> <a href='Note.html'>Next</a> >> Note<br /><h1>w17</h1>
-<!--在 div 外圍加入細黑線標定影片範圍, 且利用 padding 留下 top right buttom left 各 10px 間隔-->
+<p>心得:這學期我學到了如何使用設定ssh金鑰、用nginx架設伺服器、用wink截圖上字幕說明、blog、設置brython環境以及了解tetris程式並新增計分系統及修改功能。我自己本身很喜歡玩俄羅斯方塊，因此對這方面下了比較多的苦功，最後也成功地弄出計分系統及game over文字呈現，頗有成就感。試玩了自己的tetris遊戲程式，一開始fps我設定60，很輕鬆就達到了6分，後面越來越快到了fps=5運氣比較好超過了6分，我調到fps=2，因為更新率太快了顯示不出來，fps=4就真的無法達標了...速度太快。</p>
+<p><!--配合 Wink 檔案將 js 檔案設定如下--></p>
+<script>
+var winkVideoData = { dataVersion: 1, frameRate: 10, buttonFrameLength: 5, buttonFrameOffset: 2, frameStops: { }, };
+</script>
+<!-- 接下來將 mp4 檔案從 downloads 目錄取出 -->
 <div class="winkVideoContainerClass"><video autoplay="autoplay" class="winkVideoClass" controls="controls" data-dirname="./../cmsimde/static" data-varname="winkVideoData" height="630" muted="true" width="1008">
-<source src="./../downloads/w17_tetris.mp4" type="video/mp4"/></video> <!--<div class="winkVideoContainerClass"><video width="1008" height="630" autoplay="autoplay" class="winkVideoClass" controls="controls" data-dirname="./../cmsimde/static" data-varname="winkVideoData" muted="true">
-<source src="./../downloads/w17_tetris.mp4" type="video/mp4" /></video>--> <!--蓋掉由 Wink Javascript 與 css 所建立的影片控制項目--> <!--<div class="winkVideoOverlayClass"></div>
-<div class="winkVideoControlBarClass"><button class="winkVideoControlBarPlayButtonClass"></button> <button class="winkVideoControlBarPauseButtonClass"></button>
-<div class="winkVideoControlBarProgressLeftClass"></div>
-<div class="winkVideoControlBarProgressEmptyMiddleClass"></div>
-<div class="winkVideoControlBarProgressRightClass"></div>
-<div class="winkVideoControlBarProgressFilledMiddleClass"></div>
-<div class="winkVideoControlBarProgressThumbClass"></div>
-</div>
-<div class="winkVideoPlayOverlayClass"></div>--></div>
-<p><span></span></p>
-<p></p><br />final << <a href='final.html'>Previous</a> <a href='Note.html'>Next</a> >> Note</div>
+<source src="./../downloads/w17_tetris.mp4" type="video/mp4"/></video>
+<p></p>
+</div><br />final << <a href='final.html'>Previous</a> <a href='Note.html'>Next</a> >> Note</div>
         
     <!-- footer -->
       <div class="container">
