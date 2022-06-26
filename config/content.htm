@@ -569,9 +569,9 @@ doc["tetris"].bind("click", tetris.do)
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    # 90 is z key to anticlockwise rotate
     if key == 90:
         game.rotate()</pre>
-<p>修改按下空白鍵讓方塊下降到最底下</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    # 32 is space key to move block to bottom
-    if key == 32:
+<p>修改按下D鍵讓方塊下降到最底下</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">    # 68 is space key to move block to bottom
+    if key == 68:
         game.go_space()</pre>
 <p>修改fps方塊下降速度太快的問題，讓玩家有更好的遊戲體驗</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">fps = 60</pre>
@@ -865,7 +865,7 @@ def run1():
     try:
         url = doc.query["src"]
     except:
-        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/eebea0485cf5c4f0e828230a8c736d5ffe3e236c/pygame_to_brython_tetris.py"
+        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/ffa4878f531bc4be9768106ee2febc5fc1235eba/pygame_to_brython_tetris.py"
     prog = open(url).read()
 
     # 將程式載入編輯區
@@ -1039,7 +1039,139 @@ var winkVideoData = { dataVersion: 1, frameRate: 10, buttonFrameLength: 5, butto
 <div class="winkVideoContainerClass"><video autoplay="autoplay" class="winkVideoClass" controls="controls" data-dirname="./../cmsimde/static" data-varname="winkVideoData" height="630" muted="true" width="1008">
 <source src="./../downloads/w17_tetris.mp4" type="video/mp4"/></video>
 <p></p>
-</div><h1>Note</h1>
+</div>
+<h1>期末任務1</h1>
+<p>有bug的反轉俄羅斯方塊gist連結：<a href="https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/b13a25652eb124533b62c5f22b6436af4af360d6/reverse_tetris_fail.py">https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/b13a25652eb124533b62c5f22b6436af4af360d6/reverse_tetris_fail.py</a></p>
+<p>可成功執行的<span>反轉俄羅斯方塊gist連結：<a href="https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/b13a25652eb124533b62c5f22b6436af4af360d6/reverse_tetris.py">https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/b13a25652eb124533b62c5f22b6436af4af360d6/reverse_tetris.py</a></span></p>
+<p><span></span></p>
+<p><span></span></p>
+<script src="/static/brython.js">
+</script>
+<script src="/static/brython_stdlib.js"></script>
+<!-- for ggame -->
+<p>
+<script src="/static/jquery-3.3.1.min.js"></script>
+<script src="/static/jquery-ui.1.12.1.min.js"></script>
+<script src="/static/pixi-3.0.5.min.js"></script>
+<script src="/static/buzz-1.2.1.js"></script>
+<script src="/static/bs.js"></script>
+<script src="/downloads/brython_modules.js"></script>
+</p>
+<!-- Cango 程式庫 -->
+<p>
+<script src="/static/Cango-24v03-min.js"></script>
+<script src="/static/CangoAxes-6v01-min.js"></script>
+<script src="/static/gearUtils-09.js"></script>
+<script src="/static/SVGpathUtils-6v03-min.js"></script>
+<script src="/static/sylvester.js"></script>
+<script src="/static/PrairieDraw.js"></script>
+</p>
+<!-- for Konva 程式庫 -->
+<p>
+<script src="/static/konva.min.js"></script>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['/static/','./../downloads/py/']});
+}
+</script>
+</p>
+<p><!-- 導入 FileSaver 與 filereader --></p>
+<p>
+<script src="/cmsimde/static/ace/FileSaver.min.js" type="text/javascript"></script>
+<script src="/cmsimde/static/ace/filereader.js" type="text/javascript"></script>
+</p>
+<p><!-- 導入 ace --></p>
+<p>
+<script src="/static/ace/ace.js" type="text/javascript"></script>
+<script src="/static/ace/ext-language_tools.js" type="text/javascript"></script>
+<script src="/static/ace/mode-python3.js" type="text/javascript"></script>
+<script src="/static/ace/snippets/python.js" type="text/javascript"></script>
+</p>
+<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
+<p>
+<script type="text/javascript">
+function doSave(storage_id, filename){
+    var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});
+    filename = document.getElementById(filename).value
+    saveAs(blob, filename+".py");
+}
+</script>
+</p>
+<p></p>
+<p><!-- ######################  editor1 開始 ###################### --></p>
+<p><!-- 用來顯示程式碼的 editor 區域 --></p>
+<div id="kw_editor1" style="width: 600px; height: 300px;"></div>
+<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
+<p><!-- 存擋表單開始 --></p>
+<form><label>Filename: <input id="kw_filename" placeholder="input file name" type="text"/>.py</label> <input onclick="doSave('kw_py_src1', 'kw_filename1');" type="submit" value="Save"/></form>
+<p><!-- 存擋表單結束 --></p>
+<p></p>
+<p><!-- 執行與清除按鈕開始 --></p>
+<p><button id="kw_run1">Run</button> <button id="kw_show_console1">Output</button> <button id="kw_clear_console1">清除輸出區</button><button id="clear_bd1">清除繪圖區</button><button onclick="window.location.reload()">Reload</button></p>
+<p><!-- 執行與清除按鈕結束 --></p>
+<p></p>
+<p><!-- 程式執行 ouput 區 --></p>
+<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console1"></textarea></div>
+<p><!-- Brython 程式執行的結果, 都以 brython_div 作為切入位置 --></p>
+<p><!-- 這裡的畫布 id 為 brython_div --></p>
+<div id="brython_div"></div>
+<!-- graphics-column is for ggame -->
+<div class="col-md-0" height="1" id="graphics-column" width="1"></div>
+<p><!-- ######################  editor1 結束 ###################### --></p>
+<p><!-- 以下可以開始利用 editor1 的設定編寫對應 Brython 程式 -->
+<script type="text/python3">
+from browser import document as doc
+import ace
+
+# 清除畫布
+def clear_bd1(ev):
+    # 注意這裡清除的畫布 id 為 brython_div
+    bd = doc["brython_div"]
+    bd.clear()
+Ace1 = ace.Editor(editor_id="kw_editor1", console_id="kw_console1", container_id="kw__container1", storage_id="kw_py_src1" )
+# 從 gist 取出程式碼後, 放入 editor 作為 default 程式
+def run1():
+    # 利用 get 取下 src 變數值
+    try:
+        url = doc.query["src"]
+    except:
+        url = "https://gist.githubusercontent.com/s40723245/9a2abb77c3e7b064d400399b5852503f/raw/b13a25652eb124533b62c5f22b6436af4af360d6/reverse_tetris.py"
+    prog = open(url).read()
+
+    # 將程式載入編輯區
+    Ace1.editor.setValue(prog)
+    Ace1.editor.scrollToRow(0)
+    Ace1.editor.gotoLine(0)
+    # 直接執行程式
+    #ns = {'__name__':'__main__'}
+    #exec(prog, ns)
+    # 按下 run 按鈕
+    Ace1.run()
+
+# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
+doc['kw_run1'].bind('click', Ace1.run)
+doc['kw_show_console1'].bind('click', Ace1.show_console)
+doc['kw_clear_console1'].bind('click', Ace1.clear_console)
+doc['clear_bd1'].bind('click', clear_bd1)
+# 呼叫函式執行
+run1()
+</script>
+<!-- 以上為內建程式, 頁面可透過 ?src=gist_url 執行 --></p>
+<!-- <script src="/static/chimper/js/jquery-3.3.1.min.js"></script> -->
+<script src="/static/chimper/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/static/chimper/js/jquery-ui.js"></script>
+<script src="/static/chimper/js/popper.min.js"></script>
+<script src="/static/chimper/js/bootstrap.min.js"></script>
+<script src="/static/chimper/js/owl.carousel.min.js"></script>
+<script src="/static/chimper/js/jquery.stellar.min.js"></script>
+<script src="/static/chimper/js/jquery.countdown.min.js"></script>
+<script src="/static/chimper/js/jquery.magnific-popup.min.js"></script>
+<script src="/static/chimper/js/bootstrap-datepicker.min.js"></script>
+<script src="/static/chimper/js/aos.js"></script>
+<script src="/static/chimper/js/main.js"></script>
+<p></p>
+<div class="winkVideoContainerClass"><video autoplay="autoplay" class="winkVideoClass" controls="controls" data-dirname="./../cmsimde/static" data-varname="winkVideoData" height="630" muted="true" width="1008">
+<source src="./../downloads/w18-1_wink/w18-1.mp4" type="video/mp4"/></video></div><h1>Note</h1>
 <p>Options of function bython()</p>
 <p>pythonpath 搜索導入的模組路徑</p>
 <p><a href="https://chiamingyen.github.io/cmsimfly/">CMSimfly</a> 網際內容管理網頁的詳細功能</p>
